@@ -1,4 +1,4 @@
-package com.app.atletismo.ui.theme.activities
+package com.app.atletismo.ui.activities
 
 import android.os.Bundle
 import android.widget.Button
@@ -12,7 +12,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
         val emailEditText = findViewById<EditText>(R.id.ipt_mail)
         val passwordEditText = findViewById<EditText>(R.id.ipt_pass)
         val loginButton = findViewById<Button>(R.id.loginButton)

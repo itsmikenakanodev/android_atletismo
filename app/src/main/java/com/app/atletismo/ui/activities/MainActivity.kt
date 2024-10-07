@@ -1,4 +1,4 @@
-package com.app.atletismo
+package com.app.atletismo.ui.activities
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
