@@ -28,7 +28,7 @@ class CampeonatoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        //binding = ActivityCampeonatoBinding.inflate(layoutInflater)
+        binding = ActivityCampeonatoBinding.inflate(layoutInflater)
 
         lmanager = LinearLayoutManager(
             this,
@@ -54,7 +54,7 @@ class CampeonatoActivity : AppCompatActivity() {
     private fun chargeDataRV() {
         lifecycleScope.launch(Dispatchers.Main) {
             campeonatosItems = withContext(Dispatchers.IO) {
-                return@withContext (CampeonatosLogic().getAllCampeonatos())
+                return@withContext (CampeonatosLogic().getAllCampeonatosAPI())
             }
             campeonatosAdapter.items = campeonatosItems
             binding.rvCampeonatos.apply {

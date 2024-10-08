@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
@@ -75,4 +76,16 @@ dependencies {
 
     //material 3
     implementation("com.google.android.material:material:1.12")
+    //picasso
+    implementation("com.squareup.picasso:picasso:2.8")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    //retrofit (consumo de api)
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    //room database
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+
 }

@@ -24,7 +24,7 @@ class CampeonatosAdapterItems(
             item: Campeonatos,
             fnClick: (Campeonatos) -> Unit
         ) {
-            //binding.title.text= item.title;
+            binding.title.text= item.title;
 
             /*itemView.setOnClickListener {
                 fnClick(item)
