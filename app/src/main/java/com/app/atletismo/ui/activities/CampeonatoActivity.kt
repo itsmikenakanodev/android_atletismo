@@ -18,6 +18,7 @@ import kotlinx.coroutines.withContext
 
 class CampeonatoActivity : AppCompatActivity() {
 
+<<<<<<< HEAD
 //    private var campeonatosAdapter: CampeonatosAdapterItems =
 //        CampeonatosAdapterItems { sendPopMovieItem(it) }
 //    private var campeonatosItems: MutableList<Campeonatos> = mutableListOf<Campeonatos>()
@@ -62,4 +63,50 @@ class CampeonatoActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
+=======
+    private var campeonatosAdapter: CampeonatosAdapterItems =
+        CampeonatosAdapterItems { sendPopMovieItem(it) }
+    private var campeonatosItems: MutableList<Campeonatos> = mutableListOf<Campeonatos>()
+    private lateinit var binding: ActivityCampeonatoBinding
+    private lateinit var lmanager: LinearLayoutManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        binding = ActivityCampeonatoBinding.inflate(layoutInflater)
+
+        lmanager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+
+        setContentView(binding.root)
+
+    }
+
+    private fun sendPopMovieItem(item: Campeonatos) {
+        /*val i = Intent(requireActivity(), DetailsMovieItem::class.java)
+        i.putExtra("name", item)
+        startActivity(i)*/
+    }
+
+    override fun onStart() {
+        super.onStart()
+        chargeDataRV()
+    }
+
+    private fun chargeDataRV() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            campeonatosItems = withContext(Dispatchers.IO) {
+                return@withContext (CampeonatosLogic().getAllCampeonatosAPI())
+            }
+            campeonatosAdapter.items = campeonatosItems
+            binding.rvCampeonatos.apply {
+                this.adapter = campeonatosAdapter
+                this.layoutManager = lmanager
+            }
+        }
+    }
+>>>>>>> 3334d77591c589c6471eb30321b29de62899cf6a
 }
