@@ -1,14 +1,15 @@
 package com.app.atletismo.ui.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.app.atletismo.databinding.ActivityLoginBinding
 import com.app.atletismo.logic.LoginLogic
+import com.app.atletismo.logic.data.Login
 import kotlinx.coroutines.launch
-
 
 class LoginActivity : AppCompatActivity() {
 
@@ -38,20 +39,25 @@ class LoginActivity : AppCompatActivity() {
 
     private fun performLogin(email: String, password: String) {
         lifecycleScope.launch {
-            // Usar LoginLogic para obtener todos los logins
-            val loginLogic = LoginLogic()
-            val logins = loginLogic.getAllLogins()
+            val logins = LoginLogic().getAllLogins() // Llamar a la función para obtener logins
 
-            // Buscar el usuario que coincida con el email y la contraseña
-            val userExists = logins.any { it.email == email && it.password == password }
+            if (logins != null) {
+                // Depuración
+                Log.d("LoginActivity", "Email: $email, Password: $password")
 
-            if (userExists) {
-                // Si se encuentra el usuario, el inicio de sesión es exitoso
-                Toast.makeText(this@LoginActivity, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-                // Navegar a la siguiente actividad o pantalla
+                // Buscar el usuario que coincida con el email y la contraseña
+                val userExists = logins.any { it.email == email && it.password == password }
+
+                if (userExists) {
+                    // Si se encuentra el usuario, el inicio de sesión es exitoso
+                    Toast.makeText(this@LoginActivity, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                    // Navegar a la siguiente actividad o pantalla
+                } else {
+                    // Si no se encuentra el usuario, mostrar un mensaje de error
+                    Toast.makeText(this@LoginActivity, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                // Si no se encuentra el usuario, mostrar un mensaje de error
-                Toast.makeText(this@LoginActivity, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "Error al conectar con el servidor", Toast.LENGTH_SHORT).show()
             }
         }
     }

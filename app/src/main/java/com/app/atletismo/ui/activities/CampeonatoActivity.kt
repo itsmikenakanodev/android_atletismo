@@ -18,7 +18,6 @@ import kotlinx.coroutines.withContext
 
 class CampeonatoActivity : AppCompatActivity() {
 
-<<<<<<< HEAD
 //    private var campeonatosAdapter: CampeonatosAdapterItems =
 //        CampeonatosAdapterItems { sendPopMovieItem(it) }
 //    private var campeonatosItems: MutableList<Campeonatos> = mutableListOf<Campeonatos>()
@@ -63,7 +62,6 @@ class CampeonatoActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
-=======
     private var campeonatosAdapter: CampeonatosAdapterItems =
         CampeonatosAdapterItems { sendPopMovieItem(it) }
     private var campeonatosItems: MutableList<Campeonatos> = mutableListOf<Campeonatos>()
@@ -108,5 +106,4 @@ class CampeonatoActivity : AppCompatActivity() {
             }
         }
     }
->>>>>>> 3334d77591c589c6471eb30321b29de62899cf6a
 }

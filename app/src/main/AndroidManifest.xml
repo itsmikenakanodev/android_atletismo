@@ -2,10 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
 
-<<<<<<< HEAD
-=======
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
->>>>>>> 3334d77591c589c6471eb30321b29de62899cf6a
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
