@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun performLogin(email: String, password: String) {
         lifecycleScope.launch {
-            val logins = LoginLogic().getAllLogins() // Llamar a la función para obtener logins
+            val logins = LoginLogic().getAllLoginsAPI() // Llamar a la función para obtener logins
 
             if (logins != null) {
                 // Depuración

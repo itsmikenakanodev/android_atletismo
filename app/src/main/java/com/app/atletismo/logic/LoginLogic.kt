@@ -1,40 +1,32 @@
 package com.app.atletismo.logic
 
+import com.app.atletismo.data.endpoints.LoginEndpoint
+import com.app.atletismo.data.entities.campeonatos.Log
 import com.app.atletismo.logic.data.Login
+import com.example.aplicacionmovil.data.converters.ApiConnection
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import retrofit2.Response
 
 class LoginLogic {
 
-    private val client = OkHttpClient()
-
-    // Obtiene todos los logins desde la API
-    suspend fun getAllLogins(): List<Login>? {
+    // Método para obtener todos los logins desde la API
+    suspend fun getAllLoginsAPI(): List<Log>? {
         return withContext(Dispatchers.IO) {
             try {
-                val request = Request.Builder()
-                    .url("https://67056a3e031fd46a830fe008.mockapi.io/API/Atletismo/login")
-                    .get()
-                    .build()
+                // Realizar la llamada a la API usando Retrofit
+                val response: Response<List<Log>> = ApiConnection.getService(
+                    ApiConnection.typeApi.Atletismo,
+                    LoginEndpoint::class.java
+                ).getAllUsers()
 
-                // Ejecutar la solicitud y obtener la respuesta
-                client.newCall(request).execute().use { response ->
-                    // Comprobar si la respuesta es exitosa
-                    if (response.isSuccessful) {
-                        // Utilizar body() en lugar de body
-                        val responseBody = response.body()
-                        if (responseBody != null) {
-                            // Parsear la respuesta a una lista de Logins
-                            Gson().fromJson(responseBody.charStream(), Array<Login>::class.java).toList()
-                        } else {
-                            null // Si el cuerpo es null, devolver null
-                        }
-                    } else {
-                        null // Si la respuesta no es exitosa, devolver null
-                    }
+                if (response.isSuccessful && response.body() != null) {
+                    response.body() // Devolver la lista de logins
+                } else {
+                    null // Si no es exitosa, devolver null
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
