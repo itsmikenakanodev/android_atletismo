@@ -1,18 +1,25 @@
 package com.example.aplicacionmovil.data.converters
 
+import com.app.atletismo.data.entities.utils.LocalDateDeserializer
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDate
 
 object ApiConnection {
 
     enum class typeApi { Atletismo }
 
-    private val API_ATLETISMO = "https://67056a3e031fd46a830fe008.mockapi.io/API/Atletismo/"
+    private val API_ATLETISMO = "https://backend-atletismo.onrender.com/API/Atletismo/"
 
     private fun getConnnection(base: String): Retrofit {
+        val gson = GsonBuilder()
+            .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+            .create()
+
         return Retrofit.Builder()
             .baseUrl(base)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 

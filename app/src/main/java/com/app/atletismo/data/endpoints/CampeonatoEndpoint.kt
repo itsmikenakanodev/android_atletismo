@@ -1,8 +1,10 @@
 package com.app.atletismo.data.endpoints
 
 import com.app.atletismo.data.entities.campeonatos.Campeonato
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface CampeonatoEndpoint {
 
@@ -11,5 +13,12 @@ interface CampeonatoEndpoint {
 
     @GET("campeonatos")
     suspend fun getAllCampeonatos(): Response<List<Campeonato>>
+
+    @GET("campeonatos/filtrar")
+    fun obtenerCampeonatos(
+        @Query("anio") anio: Int,
+        @Query("mes") mes: Int
+    ): Call<List<Campeonato>>
+
 
 }
