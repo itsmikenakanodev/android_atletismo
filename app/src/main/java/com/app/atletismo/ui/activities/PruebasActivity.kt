@@ -36,20 +36,25 @@ class PruebasActivity : AppCompatActivity() {
         }
 
         binding.campeonatoTitleTextView.text = nombreCampeonato;
-        val pruebasAdapter = PruebasAdapterItems(idCampeonato, pruebas) { id, prueba ->
-            sendParameters(id, prueba)
+
+        if (pruebas.size == 0) {
+            Toast.makeText(this, "No hay pruebas disponibles", Toast.LENGTH_SHORT).show()
+        } else {
+            val pruebasAdapter = PruebasAdapterItems(idCampeonato, pruebas) { id, prueba ->
+                sendParameters(id, prueba)
+            }
+            binding.pruebasRecyclerView.apply {
+                this.layoutManager = lmanager
+                this.adapter = pruebasAdapter
+            }
         }
-        binding.pruebasRecyclerView.apply {
-            this.layoutManager = lmanager
-            this.adapter = pruebasAdapter
-        }
+
 
         setContentView(binding.root)
 
     }
 
     private fun sendParameters(idCampeonato: Int, prueba: PruebaDTO) {
-        Toast.makeText(this, "Competidores de la Prueba: ${prueba.nombre}", Toast.LENGTH_SHORT).show()
         val i = Intent(this, CompetidoresActivity::class.java)
         i.putExtra("idCampeonato", idCampeonato)
         i.putExtra("idPrueba", prueba.id)

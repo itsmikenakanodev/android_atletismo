@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -8,77 +10,71 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/card_padding">
 
         <TextView
-            android:id="@+id/nombreTextView"
+            android:id="@+id/nombreApellidosTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nombre"
             android:textColor="@color/text_color_dark"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Juan Pérez González" />
 
         <TextView
-            android:id="@+id/provinciaTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_margin"
-            android:text="Provincia"
-            android:textColor="@color/text_color_dark"
-            android:textSize="@dimen/text_size_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nombreTextView" />
-
-        <TextView
-            android:id="@+id/organizadorTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_margin_small"
-            android:text="Organizador"
-            android:textColor="@color/text_color_dark"
-            android:textSize="@dimen/text_size_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/provinciaTextView" />
-
-        <TextView
-            android:id="@+id/estadoTextView"
+            android:id="@+id/numeroCompetidorTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_margin"
-            android:background="@color/estado_proximo"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/text_color_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nombreApellidosTextView"
+            tools:text="Número: 123" />
+
+        <TextView
+            android:id="@+id/categoriaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/text_color_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/numeroCompetidorTextView"
+            tools:text="Categoría: Senior" />
+
+        <TextView
+            android:id="@+id/estadoCompetidorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:paddingStart="8dp"
             android:paddingTop="4dp"
             android:paddingEnd="8dp"
             android:paddingBottom="4dp"
-            android:textStyle="bold"
-            android:text="Proximamente"
             android:textColor="@color/text_color_light"
+            android:textStyle="bold"
             android:textSize="@dimen/text_size_medium"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/organizadorTextView" />
+            app:layout_constraintTop_toBottomOf="@id/categoriaTextView"
+            tools:background="@color/estado_activo"
+            tools:text="Activo" />
 
         <TextView
-            android:id="@+id/verPruebasTextView"
+            android:id="@+id/registrarResultadosTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Toca para ver pruebas"
+            android:text="Toca para registrar resultado"
             android:textColor="@color/button_color"
             android:textSize="12sp"
             android:textStyle="italic"
-            app:layout_constraintTop_toBottomOf="@id/estadoTextView"
+            app:layout_constraintTop_toBottomOf="@id/estadoCompetidorTextView"
             app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

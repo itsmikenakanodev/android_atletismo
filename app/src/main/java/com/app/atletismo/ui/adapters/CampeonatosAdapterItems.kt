@@ -21,8 +21,7 @@ class CampeonatosAdapterItems(
         private val binding: CampeonatoCardBinding = CampeonatoCardBinding.bind(view)
 
         fun render(
-            item: CampeonatoDTO,
-            fnClick: (CampeonatoDTO) -> Unit
+            item: CampeonatoDTO
         ) {
             binding.nombreTextView.text = item.nombre
             binding.provinciaTextView.text = item.sede
@@ -61,7 +60,6 @@ class CampeonatosAdapterItems(
                 binding.estadoTextView.setTextColor(ContextCompat.getColor(context, R.color.text_color_dark))
             }
             item.estado = estadoActual
-            binding.verPruebasButton.setOnClickListener { fnClick(item) }
         }
     }
 
@@ -79,7 +77,8 @@ class CampeonatosAdapterItems(
     }
 
     override fun onBindViewHolder(holder: CampeonatosViewHolder, position: Int) {
-        holder.render(items[position], fnClick)
+        holder.render(items[position])
+        holder.itemView.setOnClickListener { fnClick(items[position]) }
     }
 
     override fun getItemCount(): Int = items.size

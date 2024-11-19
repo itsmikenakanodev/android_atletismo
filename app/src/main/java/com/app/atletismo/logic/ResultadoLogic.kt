@@ -1,0 +1,18 @@
+package com.app.atletismo.logic
+
+import com.app.atletismo.data.endpoints.CampeonatoEndpoint
+import com.app.atletismo.data.endpoints.ResultadoEndpoint
+import com.example.aplicacionmovil.data.converters.ApiConnection
+
+class ResultadoLogic {
+
+    fun getResultadoService(): ResultadoEndpoint {
+
+        var service = ApiConnection.getService(
+            ApiConnection.typeApi.Atletismo,
+            ResultadoEndpoint::class.java
+        )
+
+        return service
+    }
+}
