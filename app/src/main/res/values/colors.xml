@@ -6,6 +6,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+
     <color name="text_color_light">#f0edee</color>
     <color name="text_color_dark">#0a090c</color>
     <color name="card_background">#f0edee</color>
@@ -15,5 +16,8 @@
     <color name="estado_finalizado">#90ddf0</color>
     <color name="estado_registrado">#90ddf0</color>
     <color name="estado_pendiente">#07393c</color>
+    <color name="button_color_2">#2c666e</color>
+    <color name="icon_color">#07393c</color>
+    <color name="background_layout_color">#D590DDF0</color>
 
 </resources>

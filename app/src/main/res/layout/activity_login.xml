@@ -3,68 +3,91 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="@dimen/screen_padding">
 
-    <!-- Título Bienvenido -->
-    <TextView
-        android:id="@+id/tv_welcome"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content_layout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Bienvenido de nuevo"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_background"
+        android:padding="@dimen/card_padding"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Subtítulo -->
-    <TextView
-        android:id="@+id/tv_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Por favor ingrese sus datos"
-        app:layout_constraintTop_toBottomOf="@id/tv_welcome"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp" />
-
-    <!-- Input de Email -->
-    <EditText
-        android:id="@+id/ipt_mail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.9" />
-
-    <!-- Input de Contraseña -->
-    <EditText
-        android:id="@+id/ipt_pass"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/ipt_mail"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.9"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="@dimen/content_margin_top"
+        android:layout_marginBottom="@dimen/content_margin_bottom">
 
-    <!-- Botón de Login -->
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Iniciar sesión"
-        android:backgroundTint="#2c666e"
-        app:layout_constraintTop_toBottomOf="@id/ipt_pass"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.9"
-        android:layout_marginTop="24dp" />
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido de nuevo"
+            android:textSize="@dimen/welcome_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/text_color_dark"
+            android:layout_marginBottom="@dimen/text_margin_bottom"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_subtitle"/>
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Por favor ingrese sus datos"
+            android:textSize="@dimen/subtitle_text_size"
+            android:textColor="@color/text_color_dark"
+            app:layout_constraintTop_toBottomOf="@id/tv_welcome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ipt_mail"
+            android:layout_marginBottom="@dimen/text_margin_bottom"/>
+
+        <EditText
+            android:id="@+id/ipt_mail"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/input_margin_bottom"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/input_padding"
+            android:textColor="@color/text_color_dark"
+            app:layout_constraintBottom_toTopOf="@id/ipt_pass"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
+
+        <EditText
+            android:id="@+id/ipt_pass"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:textColor="@color/text_color_dark"
+            android:padding="@dimen/input_padding"
+            app:layout_constraintTop_toBottomOf="@id/ipt_mail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/loginButton"
+            android:layout_marginBottom="@dimen/input_margin_bottom"/>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Iniciar sesión"
+            android:backgroundTint="@color/button_color_2"
+            android:textColor="@color/text_color_light"
+            android:padding="@dimen/button_padding"
+            app:layout_constraintTop_toBottomOf="@id/ipt_pass"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
