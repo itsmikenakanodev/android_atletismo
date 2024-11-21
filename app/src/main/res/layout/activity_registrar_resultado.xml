@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.RegistrarResultadoActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrar Resultado"
+            android:textColor="@color/text_color_light"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:id="@+id/tiempoLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiempo"
+            android:textColor="@color/text_color_light"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/titleTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/minutosEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Min"
+            android:inputType="number"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tiempoLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/segundosEditText"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/segundosEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Seg"
+            android:inputType="number"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tiempoLabel"
+            app:layout_constraintStart_toEndOf="@id/minutosEditText"
+            app:layout_constraintEnd_toStartOf="@id/milisegundosEditText"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/milisegundosEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Ms"
+            android:inputType="number"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tiempoLabel"
+            app:layout_constraintStart_toEndOf="@id/segundosEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/distanciaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distancia (metros)"
+            android:textColor="@color/text_color_light"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/minutosEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/distanciaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Distancia"
+            android:inputType="numberDecimal"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/distanciaLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/puntajeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Puntaje"
+            android:textColor="@color/text_color_light"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/distanciaEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/puntajeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Puntaje"
+            android:inputType="number"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/puntajeLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/guardarButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar Resultado"
+            android:backgroundTint="@color/button_color"
+            android:textColor="@color/text_color_light"
+            app:layout_constraintTop_toBottomOf="@id/puntajeEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -20,4 +20,9 @@
     <color name="icon_color">#07393c</color>
     <color name="background_layout_color">#D590DDF0</color>
 
+    <color name="edit_text_background_normal">#FFFFFF</color>
+    <color name="edit_text_background_focused">#E8F0FE</color>
+    <color name="edit_text_stroke_normal">#90ddf0</color>
+    <color name="edit_text_stroke_focused">#2c666e</color>
+
 </resources>

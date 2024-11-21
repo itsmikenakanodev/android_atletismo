@@ -107,10 +107,7 @@ class CompetidoresActivity : AppCompatActivity() {
 
     private fun sendParameters(resultado: ResultadoDTO) {
         Toast.makeText(this, "Competidor: ${resultado.apellidos.toString().uppercase()}, ${resultado.nombres.toString().uppercase()}", Toast.LENGTH_SHORT).show()
-        /*val i = Intent(this, CompetidoresActivity::class.java)
-        i.putExtra("idCampeonato", idCampeonato)
-        i.putExtra("idPrueba", prueba.id)
-        i.putExtra("nombrePrueba", prueba.nombre)
-        startActivity(i)*/
+        val i = Intent(this, RegistrarResultadoActivity::class.java)
+        startActivity(i)
     }
 }
