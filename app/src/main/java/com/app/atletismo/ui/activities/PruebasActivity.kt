@@ -55,7 +55,7 @@ class PruebasActivity : AppCompatActivity() {
     }
 
     private fun sendParameters(idCampeonato: Int, prueba: PruebaDTO) {
-        val i = Intent(this, CompetidoresActivity::class.java)
+        val i = Intent(this, CompetidorActivity::class.java)
         i.putExtra("idCampeonato", idCampeonato)
         i.putExtra("idPrueba", prueba.id)
         i.putExtra("nombrePrueba", prueba.nombre)

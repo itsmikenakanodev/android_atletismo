@@ -1,0 +1,57 @@
+package com.app.atletismo.ui.adapters
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.app.atletismo.databinding.ItemCompetidorBinding
+import com.app.atletismo.logic.data.dto.CompetidorDetalleDTO
+
+class CompetidoresAdapter(private val competidores: List<CompetidorDetalleDTO>) :
+    RecyclerView.Adapter<CompetidoresAdapter.CompetidorViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompetidorViewHolder {
+        val binding =
+            ItemCompetidorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CompetidorViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: CompetidorViewHolder, position: Int) {
+        holder.bind(competidores[position])
+    }
+
+    override fun getItemCount() = competidores.size
+
+    class CompetidorViewHolder(private val binding: ItemCompetidorBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(competidor: CompetidorDetalleDTO) {
+            binding.nombreTextView.text = "${competidor.nombres} ${competidor.apellidos}"
+            binding.provinciaTextView.text = "Provincia: ${competidor.provincia}"
+            binding.sexoTextView.text = "Sexo: ${competidor.sexo}"
+            binding.categoriaTextView.text = "Categoría: ${competidor.categoria}"
+            binding.numeroCompetidorTextView.text = "Número: ${competidor.numeroCompetidor}"
+            when (competidor.criterio) {
+                "Puntos" -> {
+                    binding.puntajeTextView.visibility = View.VISIBLE
+                    binding.puntajeTextView.text = "Puntaje: ${competidor.puntaje ?: "N/A"}"
+                    binding.posicionTextView.text = "Posición: ${competidor.posicion ?: "N/A"}"
+                }
+
+                "Tiempo" -> {
+                    binding.marcaTextView.visibility = View.VISIBLE
+                    binding.marcaTextView.text = "Marca: ${competidor.marca ?: "N/A"}"
+                    binding.vientoTextView.visibility = View.VISIBLE
+                    binding.vientoTextView.text = "Viento: ${competidor.viento ?: "N/A"}"
+                    binding.posicionTextView.text = "Posición: ${competidor.posicion ?: "N/A"}"
+                }
+
+                "Distancia" -> {
+                    binding.distanciaTextView.visibility = View.VISIBLE
+                    binding.distanciaTextView.text = "Distancia: ${competidor.distancia ?: "N/A"}"
+                    binding.posicionTextView.text = "Posición: ${competidor.posicion ?: "N/A"}"
+                }
+            }
+
+        }
+    }
+}

@@ -15,13 +15,13 @@ interface CampeonatoEndpoint {
     @GET("campeonatos")
     suspend fun getAllCampeonatos(): Response<List<Campeonato>>
 
-    @GET("campeonatos/campeonatos-con-pruebas")
+    @GET("campeonatos/filtrar")
     fun obtenerCampeonatos(
         @Query("anio") anio: Int,
         @Query("mes") mes: Int
     ): Call<List<Campeonato>>
 
-    @GET("campeonatos/campeonatos-sin-pruebas")
+    @GET("campeonatos/filtrar")
     fun obtenerCampeonatosSinPruebas(
         @Query("anio") anio: Int,
         @Query("mes") mes: Int

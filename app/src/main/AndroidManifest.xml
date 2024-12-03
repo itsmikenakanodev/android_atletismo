@@ -16,10 +16,16 @@
         android:theme="@style/Theme.Atletismo"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.CampeonatoDetalleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.CampeonatosListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.MainMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.CompetidoresActivity"
+            android:name=".ui.activities.CompetidorActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.PruebasActivity"
@@ -28,9 +34,6 @@
             android:name=".ui.activities.CampeonatoActivity"
             android:exported="false"
             android:theme="@style/Theme.Atletismo" />
-        <activity
-            android:name=".ui.activities.MainActivity"
-            android:exported="false" />
         <activity
             android:name=".ui.activities.LoginActivity"
             android:exported="true"

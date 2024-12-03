@@ -1,4 +1,5 @@
 package com.app.atletismo.ui.activities
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -6,8 +7,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.app.atletismo.data.entities.campeonatos.Campeonato
-import com.app.atletismo.data.entities.campeonatos.getCampeonato
+import com.app.atletismo.data.entities.campeonatos.CampeonatoResultado
+import com.app.atletismo.data.entities.campeonatos.getCampeonatoResultadoDTO
 import com.app.atletismo.databinding.ActivityCampeonatoBinding
 import com.app.atletismo.logic.CampeonatosLogic
 import com.app.atletismo.logic.data.dto.CampeonatoDTO
@@ -20,10 +21,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDate
-import java.util.ArrayList
 
-class CampeonatoActivity : AppCompatActivity() {
-
+class CampeonatosListActivity : AppCompatActivity() {
     private lateinit var campeonatosAdapter: CampeonatosAdapterItems
     private var campeonatosItems: MutableList<CampeonatoDTO> = mutableListOf<CampeonatoDTO>()
     private lateinit var binding: ActivityCampeonatoBinding
@@ -51,11 +50,8 @@ class CampeonatoActivity : AppCompatActivity() {
 
     }
 
-    private fun sendPruebas(item: CampeonatoDTO) {
-        val i = Intent(this, PruebasActivity::class.java)
-        i.putParcelableArrayListExtra("pruebas", ArrayList(item.pruebas))
-        i.putExtra("nombreCampeonato", item.nombre)
-        i.putExtra("estado", item.estado)
+    private fun sendId(item: CampeonatoDTO) {
+        val i = Intent(this, CampeonatoDetalleActivity::class.java)
         i.putExtra("idCampeonato", item.id)
         startActivity(i)
     }
@@ -67,19 +63,19 @@ class CampeonatoActivity : AppCompatActivity() {
     private fun cargarCampeonatos() {
         val fechaActual = LocalDate.now()
         val anio = fechaActual.year
-        val mes = fechaActual.monthValue
-        apiService.obtenerCampeonatos(anio, mes).enqueue(object : Callback<List<Campeonato>> {
-            override fun onResponse(call: Call<List<Campeonato>>, response: Response<List<Campeonato>>) {
+        val mes = 11
+        apiService.obtenerCampeonatosSinPruebas(anio, mes).enqueue(object : Callback<List<CampeonatoResultado>> {
+            override fun onResponse(call: Call<List<CampeonatoResultado>>, response: Response<List<CampeonatoResultado>>) {
                 if (response.isSuccessful && response.body() != null) {
                     val campeonatos = response.body()!!
 
                     campeonatos.forEach {
-                        val m = it.getCampeonato()
+                        val m = it.getCampeonatoResultadoDTO()
                         campeonatosItems.add(m)
                     }
 
                     campeonatosAdapter = CampeonatosAdapterItems(campeonatosItems) {
-                        sendPruebas(it)
+                        sendId(it)
                     }
 
                     binding.campeonatosRecyclerView.apply {
@@ -87,12 +83,12 @@ class CampeonatoActivity : AppCompatActivity() {
                         this.layoutManager = lmanager
                     }
                 } else {
-                    Toast.makeText(this@CampeonatoActivity, "Error en la respuesta", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CampeonatosListActivity, "Error en la respuesta", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<List<Campeonato>>, t: Throwable) {
-                Toast.makeText(this@CampeonatoActivity, "Error en la conexión", Toast.LENGTH_SHORT).show()
+            override fun onFailure(call: Call<List<CampeonatoResultado>>, t: Throwable) {
+                Toast.makeText(this@CampeonatosListActivity, "Error en la conexión", Toast.LENGTH_SHORT).show()
                 Log.e("CampeonatoActivity", "Error: ${t.message}")
                 showToastAndRetry()
             }
@@ -112,5 +108,4 @@ class CampeonatoActivity : AppCompatActivity() {
             Toast.makeText(this, "No se pudo conectar con el servidor después de varios intentos. Intenta mas tarde", Toast.LENGTH_LONG).show()
         }
     }
-
 }

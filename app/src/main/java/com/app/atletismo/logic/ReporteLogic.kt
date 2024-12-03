@@ -1,0 +1,19 @@
+package com.app.atletismo.logic
+
+import com.app.atletismo.data.endpoints.CampeonatoEndpoint
+import com.app.atletismo.data.endpoints.ReporteEndpoint
+import com.app.atletismo.data.endpoints.ResultadoEndpoint
+import com.example.aplicacionmovil.data.converters.ApiConnection
+
+class ReporteLogic {
+
+    fun getReporteService(): ReporteEndpoint {
+
+        var service = ApiConnection.getService(
+            ApiConnection.typeApi.Atletismo,
+            ReporteEndpoint::class.java
+        )
+
+        return service
+    }
+}
