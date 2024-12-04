@@ -24,11 +24,4 @@
     <color name="error_background">#D32F2F</color>
     <color name="error_text">#FFFFFF</color>
     <color name="error_action">#FFEB3B</color>
-
-    <!-- Definición de colores para las pestañas -->
-    <color name="tab_background_color">#2c666e</color>
-    <color name="tab_text_color">#90ddf0</color>
-    <color name="tab_selected_text_color">#f0edee</color>
-    <color name="tab_indicator_color">#90ddf0</color>
-    <color name="tab_ripple_color">#07393c</color>
 </resources>

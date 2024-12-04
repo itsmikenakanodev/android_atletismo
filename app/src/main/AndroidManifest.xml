@@ -16,13 +16,16 @@
         android:theme="@style/Theme.Atletismo"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activities.RegistrarResultadoActivity"
+            android:name=".ui.activities.CampeonatoDetalleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.CampeonatosListActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.MainMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.CompetidoresActivity"
+            android:name=".ui.activities.CompetidorActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.PruebasActivity"

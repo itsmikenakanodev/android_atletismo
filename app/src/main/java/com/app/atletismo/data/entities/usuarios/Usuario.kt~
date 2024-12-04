@@ -1,0 +1,19 @@
+package com.app.atletismo.data.entities.usuarios
+
+data class Usuario(
+    val id: Int,
+    val nombres: String,
+    val apellidos: String,
+    val email: String
+)
+
+Usuario.getUsuario(): UsuarioDTO {
+    return UsuarioDTO(
+        id,
+        nombres,
+        apellidos,
+        email,
+        idRol,
+        rol
+    )
+}

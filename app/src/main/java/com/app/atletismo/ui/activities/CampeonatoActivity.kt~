@@ -78,9 +78,7 @@ class CampeonatoActivity : AppCompatActivity() {
                         campeonatosItems.add(m)
                     }
 
-                    campeonatosAdapter = CampeonatosAdapterItems(campeonatosItems) {
-                        sendPruebas(it)
-                    }
+                    campeonatosAdapter = CampeonatosAdapterItems(campeonatosItems, ::sendPruebas)
 
                     binding.campeonatosRecyclerView.apply {
                         this.adapter = campeonatosAdapter

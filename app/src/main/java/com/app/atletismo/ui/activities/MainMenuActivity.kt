@@ -21,7 +21,7 @@ class MainMenuActivity : AppCompatActivity() {
             startActivity(CampeonatoActivity::class.java)
         }
         binding.viewResultsCard.setOnClickListener {
-            Toast.makeText(this, "En construcción..", Toast.LENGTH_LONG).show()
+            startActivity(CampeonatosListActivity::class.java)
         }
 
         binding.logoutButton.setOnClickListener {
