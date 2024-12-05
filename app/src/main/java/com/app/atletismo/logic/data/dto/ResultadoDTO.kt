@@ -13,9 +13,11 @@ data class ResultadoDTO(val id: Int,
                         val posicion: Int?,
                         val puntaje: Int?,
                         val viento: BigDecimal?,
+                        val registrado: Boolean,
                         val competidorId: Int,
                         val categoria: String?,
                         val usuarioId: Int,
                         val nombres: String?,
                         val apellidos: String?,
-                        val numeroSocio: Int?) : Parcelable
+                        val numeroSocio: Int?,
+                        val criterio: String) : Parcelable

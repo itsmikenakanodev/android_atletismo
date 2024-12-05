@@ -12,12 +12,14 @@ data class Resultado(
     val posicion: Int?,
     val puntaje: Int?,
     val viento: BigDecimal?,
+    val registrado: Boolean,
     val competidorId: Int,
     val categoria: String?,
     val usuarioId: Int,
     val nombres: String?,
     val apellidos: String?,
-    val numeroSocio: Int?
+    val numeroSocio: Int?,
+    val criterio: String
 )
 
 fun Resultado.getResultado(): ResultadoDTO {
@@ -28,11 +30,13 @@ fun Resultado.getResultado(): ResultadoDTO {
         posicion,
         puntaje,
         viento,
+        registrado,
         competidorId,
         categoria,
         usuarioId,
         nombres,
         apellidos,
-        numeroSocio
+        numeroSocio,
+        criterio
     )
 }

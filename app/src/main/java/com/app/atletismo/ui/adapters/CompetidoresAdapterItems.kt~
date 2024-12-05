@@ -10,7 +10,7 @@ import com.app.atletismo.R
 import com.app.atletismo.logic.data.dto.ResultadoDTO
 
 class CompetidoresAdapterItems(
-    private val resultados: MutableList<ResultadoDTO>,
+    private val resultados: List<ResultadoDTO>,
     private val onItemClick: (ResultadoDTO) -> Unit
 ) : RecyclerView.Adapter<CompetidoresAdapterItems.CompetidoresViewHolder>() {
 
@@ -69,12 +69,6 @@ class CompetidoresAdapterItems(
             ceros.append("0")
         }
         return ceros.append(numeroCompetidor).toString()
-    }
-
-    fun updateData(newResultados: List<ResultadoDTO>) {
-        resultados.clear()
-        resultados.addAll(newResultados)
-        notifyDataSetChanged()
     }
 }
 

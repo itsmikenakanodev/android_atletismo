@@ -1,6 +1,9 @@
 package com.app.atletismo.ui.activities
 
+import android.app.PendingIntent
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -28,6 +31,9 @@ class CompetidorActivity : AppCompatActivity() {
     private var resultadosItems: MutableList<ResultadoDTO> = mutableListOf<ResultadoDTO>()
     private lateinit var competidoresAdapter: CompetidoresAdapterItems
 
+    private var idCampeonato: Int = 0
+    private var idPrueba: Int = 0
+
     private var retryCount = 0
     private val maxRetries = 3 // Número máximo de intentos
     private var retryDelayMillis = 5000L // Retraso inicial en milisegundos (5 segundos)
@@ -42,52 +48,57 @@ class CompetidorActivity : AppCompatActivity() {
             false
         )
 
-        val idCampeonato = intent.getIntExtra("idCampeonato", 0)
-        val idPrueba = intent.getIntExtra("idPrueba", 0)
+        competidoresAdapter = CompetidoresAdapterItems(resultadosItems) { it ->
+            lanzarRegistrarResultadoActivity(it)
+        }
+        binding.competidoresRecyclerView.apply {
+            this.layoutManager = lmanager
+            this.adapter = competidoresAdapter
+        }
+
         val nombrePrueba = intent.getStringExtra("nombrePrueba")!!
 
         binding.pruebaTitleTextView.text = nombrePrueba
+
+        idCampeonato = intent.getIntExtra("idCampeonato", 0)
+        idPrueba = intent.getIntExtra("idPrueba", 0)
 
         cargarResultados(idCampeonato,idPrueba)
 
         setContentView(binding.root)
     }
 
-    private fun cargarResultados(idCampeonato: Int, idPrueba: Int) {
-        apiService.getResultadosPorCampeonatoYPrueba(idCampeonato,idPrueba).enqueue(object : Callback<List<Resultado>> {
-            override fun onResponse(call: Call<List<Resultado>>, response: Response<List<Resultado>>) {
-                if (response.isSuccessful && response.body() != null) {
-                    val resultados = response.body()!!
-                    if(resultados.isEmpty()){
-                        Toast.makeText(this@CompetidorActivity, "No se encontraron competidores inscritos en esta prueba", Toast.LENGTH_SHORT).show()
-                        return
-                    }
-                    resultados.forEach {
-                        val m = it.getResultado()
-                        resultadosItems.add(m)
-                    }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        val refrescar = intent.getBooleanExtra("refrescar", false)
+        if (refrescar) {
+            Toast.makeText(this, "Resultado Actualizado, cargando nuevos resultados... ", Toast.LENGTH_SHORT).show()
+            cargarResultados(idCampeonato,idPrueba)
+        }
+    }
 
-                    competidoresAdapter = CompetidoresAdapterItems(resultadosItems) { it ->
-                        sendParameters(it)
-                    }
-                    binding.competidoresRecyclerView.apply {
-                        this.layoutManager = lmanager
-                        this.adapter = competidoresAdapter
-                    }
+    private fun cargarResultados(idCampeonato: Int, idPrueba: Int) {
+        apiService.getResultadosPorCampeonatoYPrueba(idCampeonato, idPrueba).enqueue(object : Callback<List<Resultado>> {
+            override fun onResponse(call: Call<List<Resultado>>, response: Response<List<Resultado>>) {
+                val resultados = response.body()
+                if (resultados != null && resultados.isNotEmpty()) {
+                    competidoresAdapter.updateData(resultados.map { it.getResultado() })
                     Toast.makeText(this@CompetidorActivity, "Resultados cargados correctamente", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this@CompetidorActivity, "Error en la respuesta", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CompetidorActivity, "No se encontraron competidores inscritos en esta prueba", Toast.LENGTH_SHORT).show()
+                    Handler().postDelayed({
+                        finish()
+                    }, 2000)
                 }
             }
 
             override fun onFailure(call: Call<List<Resultado>>, t: Throwable) {
-                Toast.makeText(this@CompetidorActivity, "Error en la conexión", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@CompetidorActivity, "Error al cargar resultados", Toast.LENGTH_SHORT).show()
                 Log.e("CampeonatoActivity", "Error: ${t.message}")
-                showToastAndRetry(idCampeonato,idPrueba)
+                showToastAndRetry(idCampeonato, idPrueba)
             }
         })
     }
-
     private fun showToastAndRetry(idCampeonato: Int, idPrueba: Int) {
         if (retryCount < maxRetries) {
             retryCount++
@@ -102,12 +113,30 @@ class CompetidorActivity : AppCompatActivity() {
         }
     }
 
-    private fun sendParameters(resultado: ResultadoDTO) {
+    fun lanzarRegistrarResultadoActivity(resultado: ResultadoDTO) {
         Toast.makeText(this, "Competidor: ${resultado.apellidos.toString().uppercase()}, ${resultado.nombres.toString().uppercase()}", Toast.LENGTH_SHORT).show()
-        /*val i = Intent(this, CompetidoresActivity::class.java)
-        i.putExtra("idCampeonato", idCampeonato)
-        i.putExtra("idPrueba", prueba.id)
-        i.putExtra("nombrePrueba", prueba.nombre)
-        startActivity(i)*/
+        val intent = Intent(this, RegistrarResultadoActivity::class.java)
+        intent.putExtra("id", resultado.id)
+        intent.putExtra("criterio", resultado.criterio)
+        if(resultado.registrado){
+            intent.putExtra("registrado", true)
+            when(resultado.criterio){
+                "Puntos" -> {
+                    intent.putExtra("puntaje", resultado.puntaje)
+                    intent.putExtra("posicion", resultado.posicion)
+                }
+                "Distancia" -> {
+                    intent.putExtra("distancia", resultado.distancia.toString())
+                    intent.putExtra("posicion", resultado.posicion)
+                    intent.putExtra("viento", resultado.viento.toString())
+                }
+                "Tiempo" -> {
+                    intent.putExtra("marca", resultado.marca)
+                    intent.putExtra("posicion", resultado.posicion)
+                    intent.putExtra("viento", resultado.viento.toString())
+                }
+            }
+        }
+        startActivity(intent)
     }
 }

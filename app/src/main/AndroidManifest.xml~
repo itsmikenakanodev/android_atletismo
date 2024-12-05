@@ -25,9 +25,6 @@
             android:name=".ui.activities.MainMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.RegistrarResultadoActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.activities.CompetidorActivity"
             android:exported="false" />
         <activity

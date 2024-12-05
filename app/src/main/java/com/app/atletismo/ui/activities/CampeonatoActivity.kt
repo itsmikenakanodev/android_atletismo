@@ -67,7 +67,7 @@ class CampeonatoActivity : AppCompatActivity() {
     private fun cargarCampeonatos() {
         val fechaActual = LocalDate.now()
         val anio = fechaActual.year
-        val mes = fechaActual.monthValue
+        val mes = 11
         apiService.obtenerCampeonatos(anio, mes).enqueue(object : Callback<List<Campeonato>> {
             override fun onResponse(call: Call<List<Campeonato>>, response: Response<List<Campeonato>>) {
                 if (response.isSuccessful && response.body() != null) {
