@@ -19,7 +19,7 @@ import java.math.BigDecimal
 class RegistrarResultadoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegistrarResultadoBinding
-    private val apiService = ResultadoLogic().getResultadoService()
+    private val resultadoLogic = ResultadoLogic()
 
     private lateinit var pendingIntent: PendingIntent
 
@@ -97,7 +97,7 @@ class RegistrarResultadoActivity : AppCompatActivity() {
     }
 
     private fun registrarResultado(resultado: ResultadoRequest) {
-        apiService.actualizarResultado(resultado.id, resultado).enqueue(object :
+        resultadoLogic.actualizarResultado(resultado, object :
             Callback<Boolean> {
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
                 if (response.isSuccessful && response.body() != null) {
