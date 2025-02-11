@@ -28,7 +28,7 @@ class CampeonatoActivity : AppCompatActivity() {
     private var campeonatosItems: MutableList<CampeonatoDTO> = mutableListOf<CampeonatoDTO>()
     private lateinit var binding: ActivityCampeonatoBinding
     private lateinit var lmanager: LinearLayoutManager
-    private val apiService = CampeonatosLogic().getCampeonatoService()
+    private val campeonatoLogic = CampeonatosLogic()
 
     private var retryCount = 0
     private val maxRetries = 3 // Número máximo de intentos
@@ -68,7 +68,7 @@ class CampeonatoActivity : AppCompatActivity() {
         val fechaActual = LocalDate.now()
         val anio = fechaActual.year
         val mes = fechaActual.monthValue
-        apiService.obtenerCampeonatos(anio, mes).enqueue(object : Callback<List<Campeonato>> {
+        campeonatoLogic.obtenerCampeonatos(anio, mes, object : Callback<List<Campeonato>> {
             override fun onResponse(call: Call<List<Campeonato>>, response: Response<List<Campeonato>>) {
                 if (response.isSuccessful && response.body() != null) {
                     val campeonatos = response.body()!!
@@ -86,6 +86,7 @@ class CampeonatoActivity : AppCompatActivity() {
                         this.adapter = campeonatosAdapter
                         this.layoutManager = lmanager
                     }
+                    Toast.makeText(this@CampeonatoActivity, "Campeonatos Cargados", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this@CampeonatoActivity, "Error en la respuesta", Toast.LENGTH_SHORT).show()
                 }

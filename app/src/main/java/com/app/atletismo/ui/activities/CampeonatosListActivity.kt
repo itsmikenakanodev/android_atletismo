@@ -27,7 +27,7 @@ class CampeonatosListActivity : AppCompatActivity() {
     private var campeonatosItems: MutableList<CampeonatoDTO> = mutableListOf<CampeonatoDTO>()
     private lateinit var binding: ActivityCampeonatoBinding
     private lateinit var lmanager: LinearLayoutManager
-    private val apiService = CampeonatosLogic().getCampeonatoService()
+    private val campeonatoLogic = CampeonatosLogic()
 
     private var retryCount = 0
     private val maxRetries = 3 // Número máximo de intentos
@@ -64,7 +64,7 @@ class CampeonatosListActivity : AppCompatActivity() {
         val fechaActual = LocalDate.now()
         val anio = fechaActual.year
         val mes = fechaActual.monthValue
-        apiService.obtenerCampeonatosSinPruebas(anio, mes).enqueue(object : Callback<List<CampeonatoResultado>> {
+        campeonatoLogic.obtenerCampeonatosSinPruebas(anio, mes, object : Callback<List<CampeonatoResultado>> {
             override fun onResponse(call: Call<List<CampeonatoResultado>>, response: Response<List<CampeonatoResultado>>) {
                 if (response.isSuccessful && response.body() != null) {
                     val campeonatos = response.body()!!
