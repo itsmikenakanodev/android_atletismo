@@ -36,7 +36,7 @@ class CampeonatoDetalleActivity : AppCompatActivity() {
     private var generalCount: CampeonatoConteoGeneralDTO? = null
     private var eventoCounts: MutableList<EventoContadorCompetidorDTO> = mutableListOf()
     private var competidoresDetalle: MutableList<CompetidorDetalleDTO> = mutableListOf()
-    private val apiService = ReporteLogic().getReporteService()
+    private val reporteLogic = ReporteLogic()
 
     //variables para actualizar el progress bar
     private var totalCalls = 3
@@ -76,7 +76,7 @@ class CampeonatoDetalleActivity : AppCompatActivity() {
     }
 
     private fun loadCampeonatoData(campeonatoId: Int) {
-        apiService.obtenerConteoGeneralCampeonato(campeonatoId).enqueue(object :
+        reporteLogic.obtenerConteoGeneralCampeonato(campeonatoId, object :
             Callback<CampeonatoConteoGeneral> {
             override fun onResponse(call: Call<CampeonatoConteoGeneral>, response: Response<CampeonatoConteoGeneral>) {
                 if (response.isSuccessful) {
@@ -94,7 +94,7 @@ class CampeonatoDetalleActivity : AppCompatActivity() {
             }
         })
 
-        apiService.obtenerConteoPruebasCampeonato(campeonatoId).enqueue(object : Callback<List<EventoContadorCompetidor>> {
+        reporteLogic.obtenerConteoPruebasCampeonato(campeonatoId, object : Callback<List<EventoContadorCompetidor>> {
             override fun onResponse(call: Call<List<EventoContadorCompetidor>>, response: Response<List<EventoContadorCompetidor>>) {
                 if (response.isSuccessful) {
                     val data = response.body()!!
@@ -114,7 +114,7 @@ class CampeonatoDetalleActivity : AppCompatActivity() {
             }
         })
 
-        apiService.obtenerCompetidoresCampeonato(campeonatoId).enqueue(object : Callback<List<CompetidorDetalle>> {
+        reporteLogic.obtenerCompetidoresCampeonato(campeonatoId, object : Callback<List<CompetidorDetalle>> {
             override fun onResponse(call: Call<List<CompetidorDetalle>>, response: Response<List<CompetidorDetalle>>) {
                 if (response.isSuccessful) {
                     val data = response.body()!!
