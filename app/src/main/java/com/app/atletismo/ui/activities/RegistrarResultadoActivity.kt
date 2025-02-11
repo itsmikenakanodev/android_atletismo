@@ -142,21 +142,25 @@ class RegistrarResultadoActivity : AppCompatActivity() {
         var tiempo: String? = null
         var puntaje: Int? = null
 
-        // Verificar si el viento es un número decimal válido
-        val vientoEditText = binding.vientoEditText.text.toString().replace(',', '.')
-        if (!vientoEditText.contains(".") || vientoEditText.split("\\.".toRegex())
-                .dropLastWhile { it.isEmpty() }.toTypedArray()[1].length > 2
-        ) {
-            Toast.makeText(this, "Viento inválido", Toast.LENGTH_SHORT).show()
-            return false
+        if(criterio == "Tiempo" || criterio == "Distancia") {
+            // Verificar si el viento es un número decimal válido
+            val vientoEditText = binding.vientoEditText.text.toString().replace(',', '.')
+            if (!vientoEditText.contains(".") || vientoEditText.split("\\.".toRegex())
+                    .dropLastWhile { it.isEmpty() }.toTypedArray()[1].length > 2
+            ) {
+                Toast.makeText(this, "El valor debe tener máximo 2 decimales", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+            val vientoFloat = vientoEditText.toFloat()
+            if (vientoFloat < -2 || vientoFloat > 2) {
+                Toast.makeText(this, "Viento fuera de rango", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            viento = vientoFloat.toDouble()
         }
 
-        val vientoFloat = vientoEditText.toFloat()
-        if (vientoFloat < -2 || vientoFloat > 2) {
-            Toast.makeText(this, "Viento fuera de rango", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        viento = vientoFloat.toDouble()
+
 
         // Verificar si el criterio es "Tiempo"
         if (criterio == "Tiempo") {
@@ -228,7 +232,7 @@ class RegistrarResultadoActivity : AppCompatActivity() {
             distancia = distancia?.let { BigDecimal(it) },
             puntaje = puntaje,
             posicion = posicion,
-            viento = BigDecimal(viento)
+            viento = BigDecimal(viento?: 0.0),
         )
 
         registrarResultado(resultado)

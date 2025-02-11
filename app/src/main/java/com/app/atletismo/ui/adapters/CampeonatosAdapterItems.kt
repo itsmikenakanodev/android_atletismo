@@ -1,5 +1,6 @@
 package com.app.atletismo.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,7 +56,7 @@ class CampeonatosAdapterItems(
                 )
             )
         }
-        if (campeonato.fechaInicio < fechaActual && campeonato.fechaFin > fechaActual) {
+        else if (campeonato.fechaInicio <= fechaActual && campeonato.fechaFin >= fechaActual) {
             estadoActual = "En curso"
             holder.estadoTextView.text = estadoActual
             holder.estadoTextView.setBackgroundColor(
