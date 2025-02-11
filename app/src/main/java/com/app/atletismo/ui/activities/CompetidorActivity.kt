@@ -27,7 +27,7 @@ class CompetidorActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCompetidorBinding
     private lateinit var lmanager: LinearLayoutManager
-    private val apiService = ResultadoLogic().getResultadoService()
+    private val resultadoLogic = ResultadoLogic()
     private var resultadosItems: MutableList<ResultadoDTO> = mutableListOf<ResultadoDTO>()
     private lateinit var competidoresAdapter: CompetidoresAdapterItems
 
@@ -78,7 +78,7 @@ class CompetidorActivity : AppCompatActivity() {
     }
 
     private fun cargarResultados(idCampeonato: Int, idPrueba: Int) {
-        apiService.getResultadosPorCampeonatoYPrueba(idCampeonato, idPrueba).enqueue(object : Callback<List<Resultado>> {
+        resultadoLogic.getResultadosPorCampeonatoYPrueba(idCampeonato, idPrueba, object : Callback<List<Resultado>> {
             override fun onResponse(call: Call<List<Resultado>>, response: Response<List<Resultado>>) {
                 val resultados = response.body()
                 if (resultados != null && resultados.isNotEmpty()) {
