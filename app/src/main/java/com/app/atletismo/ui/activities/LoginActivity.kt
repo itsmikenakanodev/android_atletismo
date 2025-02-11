@@ -17,7 +17,7 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private val apiService = LoginLogic().getLoginService()
+    private val loginLogic = LoginLogic()
     private lateinit var usuario: Usuario
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun performLogin(email: String, password: String) {
-        apiService.loginAdmin(LoginRequest(email, password)).enqueue(object : Callback<Usuario> {
+        loginLogic.loginAdmin(LoginRequest(email, password), object : Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if(!response.isSuccessful){
                     when(response.code()){
